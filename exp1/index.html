@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<style>
+	* {
+	  box-sizing: border-box;
+	}
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;
+align-content: center;
+}
+
+.column {
+  float: left;
+  padding: 20px;
+ 
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding: 12px; text-align: left
+}
+	button{
+		background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  cursor: pointer;
+  border: 2px;
+  width: 15%;
+ font-weight: 500;
+ 
+
+	}
+	button:hover{
+		opacity: 0.8;
+	}
+
+	
+.card{
+	 padding-bottom: 20px ;
+	 padding-top: 10px ;
+
+  margin: auto;
+
+}
+	
+	.container {
+  padding-top: 45px ;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  padding: 12px; ̀text-align: left;
+  padding: 16px;
+  margin: auto;
+  color: #090A09;
+}
+
+
+</style>
+	<title>Matrix Solver</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+
+	<div class="container">
+		<h2>Matrix Program to find out all three Solution Case</h2>
+	<div class = "card">
+		<label  style="font-size: medium;" for="rows"><b>Number of Rows:</b></label>
+		<input type="number" id="rows">
+	</div>
+	<div  class = "card">
+		<label style="font-size: medium;" for="cols"><b>Number of Columns:</b></label>
+		<input type="number" id="cols">
+	</div>
+	<button onclick="createMatrix()">Create Matrix</button>
+
+	<div class="container">
+		<h7>Example</h7>
+		<div class="row">
+			<div class="column">
+			  <lable><b>Unquie Solution</b> </lable>
+			  <div class="row">
+				<br/>
+				 <label>[1x-3y+2z]</label>
+					 <br/>
+					
+						  <label>[2x-4y-3z]</label>
+					
+						  <br/>
+						  <label>[-3x+6y+8z] </label>
+						  <br/>
+					
+			  
+			  
+			  
+								</div>
+			</div>
+			<div class="column" >
+				<lable><b> No Solution</b> <lable>
+			   <div class="row">
+				<br/>
+
+				
+				 <label>[1x+0y+4z]</label>
+				 <br/>
+					
+						 <label>[1y-3z]</label>
+						<br/>
+					
+						  <label>[0x+0y+0z]</label>
+						
+						<br/>
+						
+				</div>
+			</div>
+	
+			<div class="column" >
+				<label><b>Infinite Solution</b></label>
+				 <div class="row">
+					<br/>
+
+					<label>[x+2y+3z]</label>
+						<br/>
+							<label>[2x+4y+6z]</label>
+						<br/>
+							<label>[3x+6y+9z]</label>
+						<br/>
+						<br/>
+				 </div>
+			  </div>
+		  </div>
+
+
+		  <div id="matrix"></div>
+
+
+
+	<button onclick="solve()" id="btnSolve" hidden>Solve</button>
+	</div>
+
+
+
+	
+
+</div>
+	
+
+	
+	<div id="result"></div>
+	</div>
+	
+	<script src="script.js"></script>
+</body>
+</html>
