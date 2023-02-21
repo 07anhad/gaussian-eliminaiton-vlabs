@@ -1,94 +1,144 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<style>
-	* {
-	  box-sizing: border-box;
-	}
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;
-align-content: center;
-}
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
 
-.column {
-  float: left;
-  padding: 20px;
- 
-}
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			background-color: #f2f2f2;
+            background-image: linear-gradient(to bottom, #e0e0e0, #f2f2f2);
+		}
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+		h2, h3, h4, h5, h6 {
+			margin-top: 10px;
+			margin-bottom: 10px;
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+		}
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  padding: 12px; text-align: left
-}
-	button{
-		background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  cursor: pointer;
-  border: 2px;
-  width: 15%;
- font-weight: 500;
- 
+		h2 {
+			font-size: 28px;
+			font-weight: 600;
+			text-align: center;
+			padding: 20px 0;
+            background-image: linear-gradient(to right, #04AA6D, #00FFA1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+		}
 
-	}
-	button:hover{
-		opacity: 0.8;
-	}
+		.container {
+			max-width: 800px;
+			margin: auto;
+			background-color: rgba(255, 255, 255, 0.8);
+			padding: 20px;
+			box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(12px);
+            border-radius: 10px;
+		}
 
-	
-.card{
-	 padding-bottom: 20px ;
-	 padding-top: 10px ;
+		.card {
+			padding: 10px;
+			margin-bottom: 10px;
+			background-color: #f2f2f2;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
 
-  margin: auto;
+		.row::after {
+			content: "";
+			display: table;
+			clear: both;
+		}
 
-}
-	
-	.container {
-  padding-top: 45px ;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  padding: 12px; ̀text-align: left;
-  padding: 16px;
-  margin: auto;
-  color: #090A09;
-}
+		.column {
+			float: left;
+			width: 33.33%;
+			padding: 10px;
+		}
 
+		input[type=number], input[type=text], input[type=password] {
+			width: 100%;
+			padding: 12px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			font-size: 16px;
+		}
 
-</style>
+		button {
+			background-color: #04AA6D;
+			color: #fff;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+			font-weight: 600;
+			width: 100%;
+            transition: all 0.3s ease;
+		}
+
+		button:hover {
+			opacity: 0.8;
+            transform: scale(1.05);
+		}
+
+		#matrix {
+			padding-top: 20px;
+		}
+
+		table {
+			border-collapse: collapse;
+			margin: auto;
+			font-size: 16px;
+		}
+
+		th, td {
+			padding: 10px;
+			text-align: center;
+			border: 1px solid #ccc;
+		}
+
+		th {
+			background-color: #f2f2f2;
+			font-weight: 600;
+		}
+
+		#result{
+			margin-top: 2rem;
+			text-align: center;
+			font-size: 20px;
+			font-weight:600;
+			color: blueviolet;
+		}
+
+		</style>
+
 	<title>Matrix Solver</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
 
 <body>
-
-
 	<div class="container">
-		<h2>Matrix Program to find out all three Solution Case</h2>
-	<div class = "card">
-		<label  style="font-size: medium;" for="rows"><b>Number of Rows:</b></label>
-		<input type="number" id="rows">
-	</div>
-	<div  class = "card">
-		<label style="font-size: medium;" for="cols"><b>Number of Columns:</b></label>
-		<input type="number" id="cols">
-	</div>
-	<button onclick="createMatrix()">Create Matrix</button>
+		<h2>Matrix Program to Find Out All Three Solution Cases</h2>
+		<div class="card">
+			<label for="rows"><b>Number of Rows:</b></label>
+			<input type="number" id="rows">
+		</div>
+		<div class="card">
+			<label for="cols"><b>Number of Columns:</b></label>
+			<input type="number" id="cols">
+		</div>
+		<button
+ onclick="createMatrix()">Create Matrix</button>
 
 	<div class="container">
 		<h7>Example</h7>
