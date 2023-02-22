@@ -32,17 +32,11 @@ function createMatrix() {
 }
 
 function getMatrix() {
-    let matrix = [];
-    // let rows = prompt("Enter the number of rows in the matrix:");
-    // let columns = prompt("Enter the number of columns in the matrix:");
-
     for (let i = 0; i < matrix.length; i++) {
-        let row = [];
         for (let j = 0; j < matrix[i].length; j++) {
             let element = parseFloat(document.getElementById("cell" + i + "_" + j).value);
-            row.push(parseFloat(element));
+            matrix[i][j] = parseFloat(element);
         }
-        matrix.push(row);
     }
 
     return matrix;
@@ -52,100 +46,73 @@ function getMatrix() {
 
 
 
+
 function solve() {
-	// Get the matrix values from the input fields
-	for (var i = 0; i < matrix.length; i++) {
-		for (var j = 0; j < matrix[i].length; j++) {
-			matrix[i][j] = parseFloat(document.getElementById("cell" + i + "_" + j).value);
-		}
-	}
-	
-
-
-
-	
-	// Get the determinant of the matrix
-	var html = "";
-	var det = getDeterminant(matrix);
-
-	if(det===0){
-		// Get the augmented matrix
-	var augMatrix = augmentMatrix(matrix);
-	// Get the rank of the matrix
-	var rank = getRank(matrix);
-
-	var rows = matrix.length;
-	var columns = matrix[0].length;
-
-	console.log(rows, columns);
-
-	
-	
-	if(rank==rows){
-		html = "<p>Unique Solution</p>";
-
-		
-	}else if(rank< columns-1){
-		html = "<p>Infinite Solutions</p>";
-		document.getElementById("result").innerHTML = html;
-
-	}else{
-		html = "<p>No Solution</p>";
-		document.getElementById("result").innerHTML = html;
-
-
-	}
-	
-	html += "<p>Rank: " + rank + "</p>";
-	html += "<p>Determinant: " + det + "</p>";
-	document.getElementById("result").innerHTML = html;
-
-
-
-	}else{
-		html = "<p>Unique Solution</p>";
-		document.getElementById("result").innerHTML = html;
-
-
-
-	}
-
-
-	
-
-	
-	
-
-	// // Check the solution type
-	// var solutionType = getSolutionType(augMatrix, rank, matrix[0].length);
-
-	// // Find the solution
-	// var solution = findSolution(augMatrix, rank, matrix[0].length);
-
-	// Display the result
-	}
-
-function augmentMatrix(matrix) {
-	let augmentedMatrix = [];
-    for (let i = 0; i < matrix.length; i++) {
-        let row = matrix[i].slice();
-        for (let j = matrix[i].length; j <= matrix[i].length; j++) {
-            row.push(0);
+    // Get the matrix values from the input fields
+    for (var i = 0; i < matrix.length; i++) {
+        for (var j = 0; j < matrix[i].length; j++) {
+            matrix[i][j] = parseFloat(document.getElementById("cell" + i + "_" + j).value);
         }
-        augmentedMatrix.push(row);
-        
-        
-        console.log('Augmented Matrix'+augmentedMatrix);
     }
-    return augmentedMatrix;
+
+    // Get the determinant of the matrix
+    var det = getDeterminant(matrix);
+
+    var html = "";
+    if (det !== 0) {
+        // The system has a unique solution
+        var numVars = matrix[0].length - 1;
+        var varNames = "";
+        for (var i = 0; i < numVars; i++) {
+            varNames += "x" + (i + 1);
+            if (i < numVars - 1) {
+                varNames += ", ";
+            }
+        }
+        var values = [];
+        for (var i = 0; i < numVars; i++) {
+            values.push(getDeterminant(getSubMatrix(matrix, 0, i)) / det);
+        }
+        html = "<p>" + varNames + " = " + values.join(", ") + "</p>";
+    } else {
+        // The system has either no solution or infinite solutions
+        var augMatrix = augmentMatrix(matrix);
+        var rank = getRank(matrix);
+        if (rank < matrix[0].length - 1) {
+            html = "<p>Infinite solutions</p>";
+        } else {
+            html = "<p>No solution</p>";
+        }
+    }
+
+    // Display the result
+    html += "<p>Determinant: " + det + "</p>";
+    document.getElementById("result").innerHTML = html;
 }
 
-function getRank(matrix) {
-	let rank = 0;
+
+
+    function augmentMatrix(matrix) {
+        let augmentedMatrix = [];
+        for (let i = 0; i < matrix.length; i++) {
+            let row = matrix[i].slice();
+            for (let j = matrix[i].length; j < 2 * matrix[i].length; j++) {
+                if (j === i + matrix[i].length) {
+                    row.push(1);
+                } else {
+                    row.push(0);
+                }
+            }
+            augmentedMatrix.push(row);
+        }
+        return augmentedMatrix;
+    }
     
+
+function getRank(matrix) {
+    let rank = 0;
     let rows = matrix.length;
     let columns = matrix[0].length;
-
     for (let i = 0; i < rows; i++) {
         let pivot = -1;
         for (let j = 0; j < columns; j++) {
@@ -166,7 +133,8 @@ function getRank(matrix) {
         }
     }
     return rank;
-	}
+}
+
 
 
 function getDeterminant(matrix) {
@@ -197,4 +165,5 @@ function getSubMatrix(matrix, row, col) {
     }
     return submatrix;
 }
+
 
