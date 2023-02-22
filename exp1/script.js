@@ -73,7 +73,14 @@ function solve() {
         for (var i = 0; i < numVars; i++) {
             values.push(getDeterminant(getSubMatrix(matrix, 0, i)) / det);
         }
-        html = "<p>" + varNames + " = " + values.join(", ") + "</p>";
+        html = "<p>" + varNames + " = ";
+        for (var i = 0; i < numVars; i++) {
+            html += fractionToDecimal(values[i].toFixed(2));
+            if (i < numVars - 1) {
+                html += ", ";
+            }
+        }
+        html += "</p>";
     } else {
         // The system has either no solution or infinite solutions
         var augMatrix = augmentMatrix(matrix);
@@ -86,9 +93,22 @@ function solve() {
     }
 
     // Display the result
-    html += "<p>Determinant: " + det + "</p>";
+    html += "<p>Determinant: " + fractionToDecimal(det.toFixed(2)) + "</p>";
     document.getElementById("result").innerHTML = html;
 }
+
+function fractionToDecimal(fraction) {
+    // Convert a fraction to a decimal string
+    var parts = fraction.split("/");
+    if (parts.length === 1) {
+        return parts[0];
+    } else {
+        var numerator = parseFloat(parts[0]);
+        var denominator = parseFloat(parts[1]);
+        return (numerator / denominator).toFixed(2);
+    }
+}
+
 
 
 
